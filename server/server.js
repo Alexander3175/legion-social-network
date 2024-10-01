@@ -2,8 +2,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import user from './models/test.js';
-
+import cookieParser from 'cookie-parser';
+import User from './models/user-model.js';
+import router from './routers/users.js';
 const app = express();
 
 dotenv.config();
@@ -14,8 +15,12 @@ const corsOption = {
 
 app.use(cors(corsOption));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
+app.use(cookieParser());
+
+app.use("/api", router)
+app.use(express.urlencoded({ extended: true }));
+/*
 app.get("/api/users", async (req, res) => {
    try {
        const users = await user.find();
@@ -34,12 +39,13 @@ app.post("/api/users", async (req, res) => {
         res.status(500).json({ error: err.message });
     }
  });
+ */
 const startApp = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URL);
+        await mongoose.connect(process.env.MONGO_URL, {dbName: 'user_management'});
         console.log('MongoDB connected');
-        app.listen(process.env.SERVER_PORT, () => {
-            console.log("Server Started on port 8080");
+        app.listen(process.env.SERVER_PORT || 3307, () => {
+            console.log(`Server Started on port ${process.env.SERVER_PORT}`);
         });
     } catch (err) {
         console.error('MongoDB connection error:', err);

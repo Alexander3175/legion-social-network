@@ -1,42 +1,23 @@
-import { useState, useEffect} from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
-import axios from 'axios'
-import './index.scss';
-function App() {
-  const [array, setArray] = useState([]);
+import {Routes, Route} from 'react-router-dom';
+import Home from './pages/home/home';
+import AuthReg from './pages/auth/reg/Registration';
+import AuthLogin from './pages/auth/login/LoginUser';
+import Profile from './pages/profile/profile';
 
-  const fetchAPI = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/api");
-      setArray(response.data.fruits);
-      console.log(response.data.fruits);
-  } catch (error) {
-      console.error("Error fetching data:", error);
-  }
-};
+import "./index.scss";
 
-useEffect(() => {
-  fetchAPI();
-}, []);
+export default function App() {
+
+
 
 return (
-  <>
-  <div>
-    <p>IM REED</p>
-  </div>
-      {array.length === 0 ? (
-          <p>No fruits available</p>
-      ) : (
-          array.map((fruit, index) => (
-              <div key={index}>
-                  <p>{fruit}</p>
-                  <br />
-              </div>
-          ))
-      )}
-  </>
+  <Routes>
+    <Route path="/" element={<Home />}/>
+    <Route path="/reg" element={<AuthReg />}/>
+    <Route path="/login" element={<AuthLogin />}/>
+    <Route path="/profile" element={<Profile />}/>
+
+  </Routes>
 );
 };
-
-export default App
+//<Route path="*" element={<NotFound />}/>

@@ -1,0 +1,71 @@
+.wrapperAside{
+    position: relative;
+    left: 0;
+    display: inline-block;
+    height: 100vh;
+    padding: 15px 25px;
+    border: 2px solid black;
+    
+    .asideConteiner{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .asideContent{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .title{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-block: 40px;                  
+                font-size: 1.5em;
+
+            }
+            .navigation{
+                flex-grow: 1;
+                .navigationList li{
+                    display: flex;
+                    transition: background-color 500ms;
+                    border-radius: 5px;
+
+                    margin-block: 50px;
+                    font-size: 1.1em;
+                    padding: 5px 10px;
+                    &:hover{
+                        background-color: rgb(240, 240, 240);
+                    }
+                }
+            }
+            .personal{
+                position: relative;
+                bottom: 0;
+                font-size: 1.1em;
+                .profile{
+                    display: flex;
+                    align-items: center;
+                }
+                .profile::before{
+                    content: '';
+                    display: block;
+                    background-color: black;
+                    border-radius: 20px;
+                    width: 30px;
+                    height: 30px;
+                    margin-right: 5px;
+                    /*
+                    background-image: url(../../assets/images/photo_2023-01-27_23-31-49.jpg);
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                   */ 
+                }
+                .more{
+                    
+                }
+            }
+        }
+    }
+}
