@@ -60,7 +60,7 @@ export default function Reg() {
         className="authentication"
         id="bth_auth"
       >
-       <Link to="/login">Увійти акаунт в Legion?</Link>
+       <Link to="/log">Увійти акаунт в Legion?</Link>
       </button>
     </section>
   );

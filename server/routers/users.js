@@ -1,14 +1,21 @@
 import express from 'express';
+import { body } from 'express-validator';
 import UserController from '../controllers/user-controller.js';
+import authMiddleware from '../middlewares/auth-middleware.js';
 
 let router = express.Router();
 
-router.post('/reg', UserController.registration)
+router.post('/registration',
+    body('email').isEmail(),
+    body('password').isLength({ min: 3, max: 32 }).withMessage('Пароль має бути від 3 до 32 символів.'),
+    UserController.registration 
+)
 router.post('/login', UserController.login)
 router.post('/logout', UserController.logout)
 router.get('/activated/:link', UserController.activate)
 router.get('/refresh', UserController.refresh)
 
-router.get('/users', UserController.getuser)
+router.get('/users', authMiddleware, UserController.getUsers)
+
 
 export default router;

@@ -14,7 +14,7 @@ return (
   <Routes>
     <Route path="/" element={<Home />}/>
     <Route path="/reg" element={<AuthReg />}/>
-    <Route path="/login" element={<AuthLogin />}/>
+    <Route path="/log" element={<AuthLogin />}/>
     <Route path="/profile" element={<Profile />}/>
 
   </Routes>
