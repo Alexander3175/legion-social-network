@@ -1,8 +1,8 @@
-
-export default function Respons(accessToken, refreshToken, user) {
-    return {
-        user: user,
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-    };
-}
+export default class User {
+    constructor(accessToken, refreshToken, user) {
+      this.user = user;
+      this.accessToken = accessToken;
+      this.refreshToken = refreshToken;
+    }
+  }
+  

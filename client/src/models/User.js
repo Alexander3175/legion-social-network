@@ -1,7 +1,8 @@
-export default function User(email, isActivated, id) {
-    return {
-        id: id,
-        email: email,
-        isActivated: isActivated,
-    };
-}
+export default class User {
+    constructor(id, email, isActivated) {
+      this.id = id;
+      this.email = email;
+      this.isActivated = isActivated;
+    }
+  }
+  

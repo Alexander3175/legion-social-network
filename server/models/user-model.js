@@ -1,11 +1,14 @@
-import {Schema, model} from 'mongoose';
+import { Schema, model } from "mongoose";
 
-const UserSchema = new Schema({
-    name: {type: String, required: true},
-    email: {type: String, nique:true, required: true},
-    password: {type: String, required: true},
-    isActivated: {type: Boolean, default: false},
-    activationLink: {type: String}
-},{collection: 'users'});
+const UserSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, nique: true, required: true },
+    password: { type: String, required: true },
+    isActivated: { type: Boolean, default: false },
+    activationLink: { type: String },
+  },
+  { collection: "users" }
+);
 
-export default model('users', UserSchema);
+export default model("users", UserSchema);

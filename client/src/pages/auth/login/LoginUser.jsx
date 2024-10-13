@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom';
 import "../styles/auth.scss";
 import { useContext, useState } from 'react';
-import { Context } from '../../../';
+import { Context } from '../../../context.js';
+import { observer } from 'mobx-react-lite';
 
-export default function LoginUser() {
+
+function LoginUser() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { store } = useContext(Context);
 
     const handleSubmit = (e) => {
-        e.preventDefault(); // Запобігання перезавантаженню сторінки
-        store.login(email, password); // Виклик методу входу
+        e.preventDefault();
+        store.login(email, password);
     };
 
     return (
@@ -53,3 +55,6 @@ export default function LoginUser() {
         </section>
     );
 }
+const ObservedLoginUser = observer(LoginUser);
+
+export default ObservedLoginUser;

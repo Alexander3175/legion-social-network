@@ -5,7 +5,7 @@ import tokenModel from "../models/token-model.js";
 //playload - дані які вшиваються в токен
 class TokenService{
     generaiteTokens(playload){
-        const accessToken = jwt.sign(playload, process.env.JWT_ACCESS_SECRET, { expiresIn: '15s' });
+        const accessToken = jwt.sign(playload, process.env.JWT_ACCESS_SECRET, { expiresIn: '15m' });
         const refreshToken = jwt.sign(playload, process.env.JWT_REFRESH_SECRET, { expiresIn: '30d' });
         
         return{
