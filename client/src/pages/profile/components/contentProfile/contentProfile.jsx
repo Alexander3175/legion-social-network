@@ -1,7 +1,3 @@
 export default function Content() {
-    return (
-    <section>
-        CONTENT qweqweqeqweqewqeqwewqqqqqqqqqqqqqqqqqqqqqqe
-    </section>
-    );
-    };
+  return <section>CONTENT qweqweqeqweqewqeqwewqqqqqqqqqqqqqqqqqqqqqqe</section>;
+}

@@ -1,8 +1,7 @@
 export default class User {
-    constructor(id, email, isActivated) {
-      this.id = id;
-      this.email = email;
-      this.isActivated = isActivated;
-    }
+  constructor(id, email, isActivated) {
+    this.id = id;
+    this.email = email;
+    this.isActivated = isActivated;
   }
-  
+}

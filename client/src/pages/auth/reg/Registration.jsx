@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../styles/auth.scss";
 import { useContext, useState } from "react";
-import { Context } from '../../../context.js';
+import { Context } from "../../../context.js";
 import { observer } from "mobx-react-lite";
 
 function RegistrationUser() {

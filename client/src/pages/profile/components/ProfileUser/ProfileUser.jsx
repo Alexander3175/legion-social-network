@@ -1,7 +1,3 @@
 export default function ProfileUser() {
-    return (
-    <section>
-        Profile qweqweqeqweqewqeqwewqqqqqqqqqqqqqqqqqqqqqqe
-    </section>
-    );
-    };
+  return <section>Profile qweqweqeqweqewqeqwewqqqqqqqqqqqqqqqqqqqqqqe</section>;
+}

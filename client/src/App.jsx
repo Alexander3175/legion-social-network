@@ -9,12 +9,12 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "./context.js";
 import { observer } from "mobx-react-lite";
 
-
 function App() {
   const { store } = useContext(Context);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    console.log('Token......')
+    console.log("Token......");
     if (localStorage.getItem("token")) {
       store.checkAuth().finally(() => setLoading(false));
     } else {
@@ -26,17 +26,17 @@ function App() {
     return <div>Loading...</div>;
   }
 
-  if(!store.isAuth){
-    return <LoginUser />
+  if (!store.isAuth) {
+    return <LoginUser />;
   }
-  
+
   return (
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/reg" element={<RegistrationUser />} />
-        <Route path="/log" element={<LoginUser />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/reg" element={<RegistrationUser />} />
+      <Route path="/log" element={<LoginUser />} />
+      <Route path="/profile" element={<Profile />} />
+    </Routes>
   );
 }
 const ObservedApp = observer(App);
