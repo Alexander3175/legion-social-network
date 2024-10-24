@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "../styles/auth.scss";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../../../context.js";
 import { observer } from "mobx-react-lite";
 
@@ -14,17 +14,18 @@ function LoginUser() {
     store.login(email, password);
   };
 
+  useEffect(() => {
+    if (store.isAuth) {
+      store.getUserProfile();
+    }
+  }, [store.isAuth]);
+
   return (
-    <section className="auteficationSection">
-      <h2 style={{ fontSize: "2em" }}>Legion</h2>
-      <div className="autefication-conteiner">
-        <h2 style={{ marginBottom: "80px" }}>Авторизація</h2>
-        <form
-          action=""
-          className="auteficationForm"
-          method="POST"
-          onSubmit={handleSubmit}
-        >
+    <section className="authenticationSection">
+      <h2 className="title">Legion</h2>
+      <div className="authentication-container">
+        <h2 className="subtitle">Авторизація</h2>
+        <form className="authenticationForm" method="POST" onSubmit={handleSubmit}>
           <label htmlFor="userGmail">Email</label>
           <input
             type="email"
@@ -50,19 +51,19 @@ function LoginUser() {
           <button type="submit" id="bth-submit">
             LOGIN
           </button>
-          <p>
+          <p className="terms">
             Продовжуючи, ви погоджуєтеся з Умовами використання та Повідомленням
             про конфіденційність Legion.
           </p>
         </form>
       </div>
-      <h3 className="Accountinformation">Вже є аккаунт?</h3>
+      <h3 className="Accountinformation">Вже є акаунт?</h3>
       <button className="authentication" id="bth_reg">
-        <Link to="/reg">Створити акаунт в Legion?</Link>
+        <Link to="/registration">Створити акаунт в Legion?</Link>
       </button>
     </section>
   );
 }
-const ObservedLoginUser = observer(LoginUser);
 
+const ObservedLoginUser = observer(LoginUser);
 export default ObservedLoginUser;

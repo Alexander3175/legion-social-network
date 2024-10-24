@@ -10,6 +10,7 @@ import { Context } from "./context.js";
 import { observer } from "mobx-react-lite";
 
 function App() {
+  
   const { store } = useContext(Context);
   const [loading, setLoading] = useState(true);
 
@@ -27,15 +28,20 @@ function App() {
   }
 
   if (!store.isAuth) {
-    return <LoginUser />;
+    return (
+      <Routes>
+        <Route path="/login" element={<LoginUser />} />
+        <Route path="/registration" element={<RegistrationUser />} />
+        <Route path="*" element={<LoginUser />} />
+      </Routes>
+    );
   }
 
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/reg" element={<RegistrationUser />} />
-      <Route path="/log" element={<LoginUser />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="*" element={<Home />} />
     </Routes>
   );
 }

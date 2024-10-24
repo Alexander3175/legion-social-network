@@ -12,7 +12,7 @@ export default function Aside() {
             <ul className="navigationList">
               <li>
                 <div className="svg-navigation">d1</div>
-                <a href="#">Головна</a>
+                <Link to="/">Головна</Link>
               </li>
               <li>
                 <div className="svg-navigation">d2</div>
@@ -26,10 +26,10 @@ export default function Aside() {
           </div>
           <div className="personal">
             <div className="profile">
-              <Link to="/reg">Профіль</Link>
+              <Link to="/profile">Профіль</Link>
             </div>
             <div className="more">
-              <a>Більше</a>
+              <Link to="/profile">Більше</Link>
             </div>
           </div>
         </div>

@@ -5,6 +5,8 @@ import EmailService from "./email-service.js";
 import UserDto from "../datatransferobject/user-dto.js";
 import ApiError from "../exception/api-error.js";
 import tokenService from "./token-service.js";
+import postModel from "../models/post-model.js";
+import Post from "../models/post-model.js";
 
 class UserService {
   async registration(name, email, password) {
@@ -91,6 +93,28 @@ class UserService {
   async getAllUser() {
     const users = await userModel.find();
     return users;
+  }
+
+  async createPost({ user_id, title, content }) {
+      if (!title || !content) {
+        throw new ApiError(400, "Необхідні всі поля");
+      const newPost = new Post({
+        user: user_id, 
+        title,
+        content,
+        like: 0,
+        createdAt: Date.now(),
+      });
+  
+      await newPost.save();
+      return newPost;
+    }
+  }
+  
+  
+  async getAllPost() {
+    const posts = await postModel.find();
+    return posts;
   }
 }
 

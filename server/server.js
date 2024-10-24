@@ -23,7 +23,7 @@ app.use("/api", router);
 app.use(errorMiddleware);
 const startApp = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URL, {
+    await mongoose.connect(process.env.MONGO_URL_LOCAL, {
       dbName: "user_management",
     });
     console.log("MongoDB connected");

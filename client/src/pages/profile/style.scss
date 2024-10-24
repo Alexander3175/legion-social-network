@@ -2,3 +2,244 @@
 .conteiner{
     display: flex;
 }   
+
+.wrapper-profile {
+  background-color: #f0f0f0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.profile-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  width: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    width: 95%;
+    padding: 20px;
+  }
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.profile-image img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.profile-info {
+  margin-left: 20px;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+.username {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.bio {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.profile-container__btn{
+  display: flex;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+}
+
+.profile-btn {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #45a049;
+  }
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}
+
+.stat-item h4 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.stat-item p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.profile-posts {
+  margin-top: 20px;
+}
+
+.profile-posts h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.profile-post-item {
+  background-color: #eaeaea;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
+}
+
+.profile-create-posts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2; 
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #333;
+
+  &:hover {
+    background-color: #e0e0e0; 
+    border-color: #bbb; 
+  }
+}
+
+
+/* Модальне вікно */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-post-form label {
+  font-weight: 600;
+  margin: 10px 0 5px;
+}
+
+.create-post-form input,
+.create-post-form textarea {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.create-post-form textarea {
+  resize: vertical;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.submit-post {
+  background-color: #f2c200;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancel-post {
+  background-color: #e0e0e0;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

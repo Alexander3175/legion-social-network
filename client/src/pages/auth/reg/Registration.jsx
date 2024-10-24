@@ -8,23 +8,24 @@ function RegistrationUser() {
   const [username, setUsername] = useState("");
   const [userGmail, setUsergmail] = useState("");
   const [userpassword, setUserpassword] = useState("");
+  const [passwordcheck, setPasswordcheck] = useState("");
   const { store } = useContext(Context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (userpassword !== passwordcheck) {
+      alert("Паролі не співпадають");
+      return;
+    }
     store.registration(username, userGmail, userpassword);
   };
+
   return (
     <section className="registrationSection">
-      <h2 style={{ fontSize: "2em" }}>Legion</h2>
+      <h2 className="title">Legion</h2>
       <div className="registration-container">
-        <h2 style={{ marginBottom: "80px" }}>Створення Акаунта</h2>
-        <form
-          action=""
-          className="registrationForm"
-          method="POST"
-          onSubmit={handleSubmit}
-        >
+        <h2 className="subtitle">Створення Акаунта</h2>
+        <form className="registrationForm" method="POST" onSubmit={handleSubmit}>
           <label htmlFor="username">Ваше Імя</label>
           <input
             type="text"
@@ -37,9 +38,7 @@ function RegistrationUser() {
             onChange={(e) => setUsername(e.target.value)}
           />
 
-          <label className="userGmail" htmlFor="userGmail">
-            Email
-          </label>
+          <label htmlFor="userGmail">Email</label>
           <input
             type="email"
             name="userGmail"
@@ -51,9 +50,7 @@ function RegistrationUser() {
             onChange={(e) => setUsergmail(e.target.value)}
           />
 
-          <label className="userpassword" htmlFor="userpassword">
-            Пароль
-          </label>
+          <label htmlFor="userpassword">Пароль</label>
           <input
             type="password"
             name="userpassword"
@@ -65,9 +62,7 @@ function RegistrationUser() {
             onChange={(e) => setUserpassword(e.target.value)}
           />
 
-          <label className="passwordcheck" htmlFor="passwordcheck">
-            Повторіть пароль
-          </label>
+          <label htmlFor="passwordcheck">Повторіть пароль</label>
           <input
             type="password"
             name="passwordcheck"
@@ -75,15 +70,14 @@ function RegistrationUser() {
             required
             placeholder="Повторіть пароль"
             maxLength="24"
+            value={passwordcheck}
+            onChange={(e) => setPasswordcheck(e.target.value)}
           />
 
-          <input
-            type="submit"
-            name="submit"
-            id="bth-submit"
-            value="Створити акаунт"
-          />
-          <p>
+          <button type="submit" id="bth-submit">
+            Створити акаунт
+          </button>
+          <p className="terms">
             Продовжуючи, ви погоджуєтеся з Умовами використання та Повідомленням
             про конфіденційність Legion.
           </p>
@@ -92,11 +86,11 @@ function RegistrationUser() {
 
       <h3 className="Accountinformation">Вже є акаунт?</h3>
       <button className="authentication" id="bth_auth">
-        <Link to="/log">Увійти акаунт в Legion?</Link>
+        <Link to="/login">Увійти в акаунт Legion?</Link>
       </button>
     </section>
   );
 }
-const ObservedRegistrationUser = observer(RegistrationUser);
 
+const ObservedRegistrationUser = observer(RegistrationUser);
 export default ObservedRegistrationUser;

@@ -1,8 +1,6 @@
 import jwt from "jsonwebtoken";
 import TokenSchema from "../models/token-model.js";
 import tokenModel from "../models/token-model.js";
-
-//playload - дані які вшиваються в токен
 class TokenService {
   generaiteTokens(playload) {
     const accessToken = jwt.sign(playload, process.env.JWT_ACCESS_SECRET, {
@@ -21,7 +19,6 @@ class TokenService {
   validateAccessToken(accessToken) {
     try {
       const userData = jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET);
-      console.log("Token valid, userDataVALIDATE:", userData);
       if (!userData) {
         return ApiError.UnauthorizedError();
       }

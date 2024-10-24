@@ -24,6 +24,8 @@ export default class Store {
       localStorage.setItem("token", response.accessToken);
       this.setAuth(true);
       this.setUser(response.user);
+
+      this.getUserProfile();
     } catch (e) {
       console.log(e);
     }
@@ -62,6 +64,28 @@ export default class Store {
       this.setUser(response.data.user);
     } catch (e) {
       console.log(e);
+      this.setAuth(false);
+    }
+  }
+
+  async getUserProfile() {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(`${API_URL}/users`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 200) {
+        this.setUser(response.data);
+        this.setAuth(true);
+      } else {
+        console.log("Не вдалося завантажити профіль користувача");
+        this.setAuth(false);
+      }
+    } catch (e) {
+      console.log("Помилка при завантаженні профілю користувача:", e);
       this.setAuth(false);
     }
   }

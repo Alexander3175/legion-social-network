@@ -1,9 +1,12 @@
+
 .registrationSection {
-  margin: 50px 0;
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 40px 0;
+
 
   .registration-container {
     padding: 50px 30px;
@@ -15,7 +18,6 @@
     .registrationForm {
       display: flex;
       flex-direction: column;
-      flex-wrap: wrap;
       justify-content: start;
 
       label {
@@ -26,7 +28,7 @@
       input {
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
         background-color: inherit;
-        border: 1px solid #000000;
+        border: 1px solid #000;
         border-radius: 5px;
         padding: 5px 10px;
         margin-bottom: 20px;
@@ -40,58 +42,9 @@
         border-radius: 10px;
         border: none;
         margin-top: 50px;
+        cursor: pointer;
       }
 
-      p {
-        font-size: 0.7em;
-        font-weight: 500;
-      }
-    }
-  }
-}
-
-/*--------------*/
-.auteficationSection {
-  margin: 50px 0;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  .autefication-conteiner {
-    padding: 50px 30px;
-    margin-top: 30px;
-    width: 350px;
-    border: 3px solid rgba(222, 222, 222, 58%);
-    border-radius: 40px;
-    .auteficationForm {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      justify-content: start;
-
-      label {
-        font-weight: 600;
-        margin-bottom: 20px;
-      }
-      input {
-        -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 20%);
-        moz-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 20%);
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 20%);
-        background-color: inherit;
-        border: 1px solid #000000;
-        border-radius: 5px;
-        padding: 5px 10px;
-        margin-bottom: 20px;
-      }
-      input[type="submit"] {
-        background-color: #f2c200;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        padding: 10px 0;
-        border-radius: 10px;
-        border: none;
-        margin-top: 50px;
-      }
       p {
         font-size: 0.7em;
         font-weight: 500;
@@ -113,19 +66,120 @@
     width: 90px;
     height: 2px;
     margin-right: 10px;
-    background-color: rgba(0, 0, 0, 58%);
+    background-color: rgba(0, 0, 0, 0.58);
     border-radius: 50%;
   }
 }
 
 .authentication {
-  -webkit-box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 30%);
-  moz-box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 30%);
-  box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 30%);
+  box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.3);
   background-color: inherit;
-  border: 1px solid #000000;
+  border: 1px solid #000;
   border-radius: 15px;
   padding: 10px 90px;
   margin-bottom: 20px;
   font-weight: 500;
+  cursor: pointer;
+}
+
+#bth_auth {
+  text-decoration: none;
+  color: inherit;
+}
+
+#bth_reg {
+  text-decoration: none;
+  color: inherit;
+}
+
+.authenticationSection {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+
+  .authentication-container {
+    padding: 50px 30px;
+    margin-top: 30px;
+    width: 350px;
+    border: 3px solid rgba(222, 222, 222, 0.58);
+    border-radius: 40px;
+
+    .authenticationForm {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+
+      label {
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      input {
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+        background-color: inherit;
+        border: 1px solid #000;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-bottom: 20px;
+      }
+
+      #bth-submit {
+        background-color: #f2c200;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        padding: 10px 0;
+        border-radius: 10px;
+        border: none;
+        margin-top: 50px;
+        cursor: pointer;
+      }
+
+      p {
+        font-size: 0.7em;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.Accountinformation {
+  display: flex;
+  font-size: 1em;
+  align-items: center;
+  margin: 40px 0;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: 90px;
+    height: 2px;
+    margin-right: 10px;
+    background-color: rgba(0, 0, 0, 0.58);
+    border-radius: 50%;
+  }
+}
+
+.authentication {
+  box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.3);
+  background-color: inherit;
+  border: 1px solid #000;
+  border-radius: 15px;
+  padding: 10px 90px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#bth_auth {
+  text-decoration: none;
+  color: inherit;
+}
+
+#bth_reg {
+  text-decoration: none;
+  color: inherit;
 }
