@@ -1,9 +1,10 @@
 import { Schema, model } from "mongoose";
 
+
 const PostSchema = new Schema(
   {
     user: {
-      type: Schema.Types.ObjectId, 
+      type: Schema.Types.ObjectId,
       ref: "users",
       required: true,
     },
@@ -19,9 +20,19 @@ const PostSchema = new Schema(
       type: Number,
       default: 0,
     },
+    likedBy: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "user",
+      },
+    ],
     createdAt: {
       type: Date,
       default: Date.now,
+    },
+    file: { 
+      type: String,
+      default: null,
     },
   },
   { collection: "posts" }

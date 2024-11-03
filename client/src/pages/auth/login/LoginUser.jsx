@@ -1,25 +1,46 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/auth.scss";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../../context.js";
 import { observer } from "mobx-react-lite";
-
+import {ToastContainer, toast } from "react-toastify";
+  import 'react-toastify/dist/ReactToastify.css';
 function LoginUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { store } = useContext(Context);
+  const navigate = useNavigate(); 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    store.login(email, password);
+    
+    try {
+      await store.login(email, password);
+      if (store.isAuth) {
+        toast.success("Вітаємо! Ви успішно увійшли.");
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Помилка входу:", error);
+      console.log("Деталі помилки:", error);
+      const errorMessage = error.response?.data?.message || "Неправильний email або пароль. Спробуйте ще раз.";
+      toast.error(errorMessage); 
+    }
   };
 
   useEffect(() => {
-    if (store.isAuth) {
-      store.getUserProfile();
-    }
-  }, [store.isAuth]);
+    const fetchUserProfile = async () => {
+      if (store.isAuth && !store.user.id) {
+        await store.getUserProfile();
+      }
+    };
+  
+    fetchUserProfile();
+  }, [store, store.isAuth]);
+  
+  if (store.isAuth && !store.user.id) return <p>Завантаження...</p>;
 
+ 
   return (
     <section className="authenticationSection">
       <h2 className="title">Legion</h2>
@@ -61,6 +82,7 @@ function LoginUser() {
       <button className="authentication" id="bth_reg">
         <Link to="/registration">Створити акаунт в Legion?</Link>
       </button>
+      <ToastContainer/>
     </section>
   );
 }

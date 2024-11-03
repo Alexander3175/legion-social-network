@@ -96,25 +96,37 @@ class UserService {
   }
 
   async createPost({ user_id, title, content }) {
-      if (!title || !content) {
-        throw new ApiError(400, "Необхідні всі поля");
-      const newPost = new Post({
-        user: user_id, 
-        title,
-        content,
-        like: 0,
-        createdAt: Date.now(),
-      });
-  
-      await newPost.save();
-      return newPost;
+    if (!title || !content) {
+      throw ApiError.badRequest("Необхідні всі поля");
     }
+    const newPost = new Post({
+      user: user_id,
+      title,
+      content,
+      like: 0,
+      createdAt: Date.now(),
+    });
+
+    await newPost.save();
+    return newPost;
   }
-  
-  
+
   async getAllPost() {
     const posts = await postModel.find();
     return posts;
+  }
+
+  async updateUserProfile(userId, { name, bio }){
+  const user = await userModel.findById(userId);
+  if (!user) {
+    throw ApiError.badRequest("Користувач не знайдений");
+  }
+  user.name = name || user.name;
+  user.bio = bio || user.bio;
+
+
+  await user.save();
+  return new UserDto(user);
   }
 }
 

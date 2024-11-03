@@ -1,6 +1,5 @@
-
-.conteiner{
-    display: flex;
+.conteiner {
+  display: flex;
 }   
 
 .wrapper-profile {
@@ -70,7 +69,7 @@
   color: #555;
 }
 
-.profile-container__btn{
+.profile-container__btn {
   display: flex;
   gap: 20px;
 
@@ -124,14 +123,27 @@
   margin-bottom: 15px;
 }
 
+.profile-posts-conteiner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
 .profile-post-item {
+  width: 300px;
   background-color: #eaeaea;
   padding: 15px;
-  margin-bottom: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 
   @media (max-width: 768px) {
+    width: 90%;
     padding: 10px;
   }
 }
@@ -156,8 +168,6 @@
   }
 }
 
-
-/* Модальне вікно */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -242,4 +252,27 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.post-item__image {
+  display: flex;
+  width: 100%;
+  max-height: 300px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px; 
+  overflow: hidden; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.post-image, .post-video {
+  width: 100%; 
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.post-item__details {
+  padding: 10px 0;
 }

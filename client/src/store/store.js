@@ -1,7 +1,7 @@
 import axios from "axios";
 import authService from "../services/authService.js";
 import { makeAutoObservable } from "mobx";
-import { API_URL } from "../http/index.js";
+import api, { API_URL } from "../http/index.js";
 export default class Store {
   user = {};
   isAuth = false;
@@ -19,8 +19,6 @@ export default class Store {
   async login(email, password) {
     try {
       const response = await authService.login(email, password);
-
-      console.log("Store Login Response:", response);
       localStorage.setItem("token", response.accessToken);
       this.setAuth(true);
       this.setUser(response.user);
@@ -28,6 +26,7 @@ export default class Store {
       this.getUserProfile();
     } catch (e) {
       console.log(e);
+      throw e;
     }
   }
   async registration(name, email, password) {
@@ -58,7 +57,6 @@ export default class Store {
       const response = await axios.get(`${API_URL}/refresh`, {
         withCredentials: true,
       });
-      console.log("Store CheckAuth:" + response);
       localStorage.setItem("token", response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);
@@ -71,11 +69,8 @@ export default class Store {
   async getUserProfile() {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`${API_URL}/users`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      if (!token) return;
+      const response = await api.get(`${API_URL}/users`);
 
       if (response.status === 200) {
         this.setUser(response.data);
@@ -87,6 +82,21 @@ export default class Store {
     } catch (e) {
       console.log("Помилка при завантаженні профілю користувача:", e);
       this.setAuth(false);
+    }
+  }
+
+  async updateUserProfile(updatedData) {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("Користувач не авторизований");
+     const response = await api.put(`${API_URL}/user/profile`, updatedData)
+     if (response.status === 200) {
+      this.setUser(response.data); 
+    } else {
+      console.error("Не вдалося оновити профіль користувача");
+    }
+    } catch (e) {
+      console.log(e);
     }
   }
 }

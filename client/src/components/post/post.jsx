@@ -2,6 +2,8 @@ import { useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../context.js";
 import userService from "../../services/userService.js";
+import postService from "../../services/postService.js";
+
 import "./postStyle.scss";
 
 const Posts = observer(() => {
@@ -10,8 +12,16 @@ const Posts = observer(() => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const postsResponse = await userService.fetchPosts();
+        const postsResponse = await postService.fetchPosts();
 
+        const postsWithUsers = await Promise.all(
+          postsResponse.map(async (post) => {
+            const user = await userService.fetchUserById(post.user);
+            return { ...post, user };
+          })
+        );
+
+        postStore.setPosts(postsWithUsers);
       } catch (e) {
         console.error("Помилка під час отримання постів:", e);
       }
@@ -19,6 +29,18 @@ const Posts = observer(() => {
 
     fetchData();
   }, [postStore]);
+
+  const handleLike = async (postId) => {
+    try {
+      const updatedPost = await postService.like(postId);
+
+      postStore.updatePosts(updatedPost);
+      alert("Лайк успішно додано!");
+    } catch (error) {
+      console.error("Помилка під час лайку поста:", error);
+      alert("Не вдалося лайкнути пост. Спробуйте ще раз.");
+    }
+  };
 
   return (
     <div className="post-wrapper">
@@ -30,23 +52,51 @@ const Posts = observer(() => {
                 <div className="post-information">
                   <div className="fromAccount-image"></div>
                   <div className="post-information__from">
-                    <h3 className="accountName">{elem.userName || "Невідомий користувач"}</h3>
-                    <h5 className="accountData">{new Date(elem.createdAt).toLocaleString() || "Час невідомий"}</h5>
+                    <h3 className="accountName">
+                      {elem.user.name || "Невідомий користувач"}
+                    </h3>
+                    <h5 className="accountData">
+                      {new Date(elem.createdAt).toLocaleString() ||
+                        "Час невідомий"}
+                    </h5>
                   </div>
                 </div>
                 <div className="post-item__content">
-                  <p>{elem.title || "title відсутній"}</p>
+                  <h3>{elem.title || "title відсутній"}</h3>
                   <p>{elem.content || "Контент відсутній"}</p>
                 </div>
                 <div className="post-item__photo">
-                  {elem.image ? (
-                    <img src={elem.image} alt="Зображення посту" className="post-image" />
+                  {elem.file ? (
+                    elem.file.endsWith(".mp4") ? (
+                      <video
+                        controls
+                        className="post-video"
+                        src={`http://localhost:8080/server/${elem.file.replace(
+                          /\\/g,
+                          "/"
+                        )}`}
+                        alt="Відео посту"
+                      />
+                    ) : (
+                      <img
+                        src={`http://localhost:8080/server/${elem.file.replace(
+                          /\\/g,
+                          "/"
+                        )}`}
+                        alt="Зображення посту"
+                        className="post-image"
+                      />
+                    )
                   ) : (
                     <div className="image-test"></div>
                   )}
                 </div>
+
                 <div className="post-item__likes">
-                  <div className="test-imageLikes"></div>
+                  <div
+                    className="test-imageLikes"
+                    onClick={() => handleLike(elem._id)}
+                  ></div>
                   <p>Вподобали: {elem.like || 0} Користувачів</p>
                 </div>
               </div>

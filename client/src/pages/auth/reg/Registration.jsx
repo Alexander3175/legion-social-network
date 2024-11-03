@@ -1,25 +1,46 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "../styles/auth.scss";
 import { useContext, useState } from "react";
 import { Context } from "../../../context.js";
 import { observer } from "mobx-react-lite";
+import {ToastContainer, toast } from "react-toastify";
+  import 'react-toastify/dist/ReactToastify.css';
 
 function RegistrationUser() {
   const [username, setUsername] = useState("");
   const [userGmail, setUsergmail] = useState("");
   const [userpassword, setUserpassword] = useState("");
   const [passwordcheck, setPasswordcheck] = useState("");
+  const [redirect, setRedirect] = useState(false);
   const { store } = useContext(Context);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (userpassword !== passwordcheck) {
-      alert("Паролі не співпадають");
+      toast.error("Паролі не співпадають");
       return;
     }
-    store.registration(username, userGmail, userpassword);
-  };
 
+    try {
+      await store.registration(username, userGmail, userpassword);
+      toast.success("Ви успішно створили акаунт!");
+      setTimeout(() => {
+        setRedirect(true);
+      }, 3000);    } catch (error) {
+      console.error("Помилка реєстрації:", error);
+      const errorMessage = error.response?.data?.message || "Сталася помилка при реєстрації. Спробуйте ще раз.";
+      toast.error(errorMessage);
+    }
+
+    setUsername("");
+    setUsergmail("");
+    setUserpassword("");
+    setPasswordcheck("");
+  };
+  if (redirect) {
+    return <Navigate to="/login" />;
+  }
   return (
     <section className="registrationSection">
       <h2 className="title">Legion</h2>
@@ -88,6 +109,7 @@ function RegistrationUser() {
       <button className="authentication" id="bth_auth">
         <Link to="/login">Увійти в акаунт Legion?</Link>
       </button>
+      <ToastContainer />
     </section>
   );
 }
