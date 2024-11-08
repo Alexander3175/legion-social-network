@@ -9,9 +9,11 @@ function Home() {
   return (
     <>
      <div className="wrapper">
-     <Aside />
-     <Post />
-     </div>
+      <Aside />
+      <div className="post-wrapper">
+        <Post />
+      </div>
+    </div>
     </>
   );
 }

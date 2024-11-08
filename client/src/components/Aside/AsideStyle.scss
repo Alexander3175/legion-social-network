@@ -1,104 +1,159 @@
 .wrapperAside {
-  position: relative;
+  position: fixed;
   left: 0;
-  display: inline-block;
+  top: 0;
+  display: flex;
+  justify-content: left;
+  z-index: 999;
+  flex-direction: column;
   height: 100vh;
-  padding: 15px 25px;
-  border: 2px solid black;
-  background-color: white;
+  width: 250px; /* Задаємо ширину для бічної панелі */
+  padding: 20px;
+  border-right: 2px solid rgba(0, 0, 0, 0.1); /* Легкий правий бордер */
+  background-color: #fff; /* Білий фон для панелі */
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1); /* Легка тінь для панелі */
 
   .asideConteiner {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    .asideContent {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
+    padding-bottom: 20px;
+  }
 
-      .title {
+  .asideContent {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-block: 40px;
+      font-size: 1.6em;
+      font-weight: 600;
+      color: #333; /* Темний колір для заголовка */
+    }
+
+    .navigation {
+      flex-grow: 1;
+      .navigationList li {
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin-block: 40px;
-        font-size: 1.5em;
-      }
-      .navigation {
-        flex-grow: 1;
-        .navigationList li {
-          display: flex;
-          transition: background-color 500ms;
-          border-radius: 5px;
-
-          margin-block: 50px;
-          font-size: 1.1em;
-          padding: 5px 10px;
-          &:hover {
-            background-color: rgb(240, 240, 240);
-          }
-        }
-      }
-      .personal {
-        display: flex;
-        flex-direction: column;
-        align-items: right;
-        gap: 15px;
-        position: relative;
-        bottom: 0;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Плавна анімація для фонів і зсувів */
+        padding: 8px 12px;
+        margin-bottom: 15px;
         font-size: 1.1em;
-        .profile {
-          display: flex;
-          align-items: center;
+        border-radius: 8px;
+        color: #444; /* Темний колір для тексту */
+
+        &:hover {
+          background-color: #f5f5f5; /* Легке світле тло при hover */
+          transform: translateX(5px); /* Легке зсуви при hover */
         }
+      }
+    }
+
+    .personal {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* Використовуємо flex-start замість right для лівого вирівнювання */
+      gap: 20px;
+      font-size: 1.1em;
+      position: relative;
+      margin-top: 20px;
+
+      .profile {
+        display: flex;
+        align-items: center;
 
         .profile::before {
           content: "";
           display: block;
-          background-color: black;
-          border-radius: 20px;
-          width: 30px;
-          height: 30px;
-          margin-right: 5px;
-          /*
-                    background-image: url(../../assets/images/photo_2023-01-27_23-31-49.jpg);
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                   */
+          background-color: #e74c3c; /* Вибір кольору для аватарки */
+          border-radius: 50%;
+          width: 35px;
+          height: 35px;
+          margin-right: 10px;
+          background-image: url('../../assets/images/photo_2023-01-27_23-31-49.jpg');
+          background-position: center;
+          background-size: cover; /* Застосовуємо зображення для профілю */
         }
-        .more {
+      }
+
+      .more {
+        display: flex;
+        align-items: center;
+
+        a {
           display: flex;
           align-items: center;
+          position: relative;
+          font-size: 1em;
+          text-decoration: none;
+          color: #333;
+          padding: 5px 10px;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;
 
-          a {
-            display: flex;
-            align-items: center;
+          &::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 2px;
+            background-color: #333;
+            margin-right: 8px;
             position: relative;
+            top: -4px;
+            box-shadow: 0 6px 0 0 #333, 0 12px 0 0 #333; /* Додав тіні для лінії */
+          }
 
-            &::before {
-              content: "";
-              display: inline-block;
-              width: 20px;
-              height: 2px;
-              background-color: black;
-              margin-right: 5px;
-              position: relative;
-              top: -6px;
-              box-shadow: 0 6px 0 0 black,  0 12px 0 0 black;
-            }
-
-            text-decoration: none;
-            color: #000;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-
-            &:hover {
-              background-color: #e0e0e0;
-            }
+          &:hover {
+            background-color: #e0e0e0;
           }
         }
       }
     }
   }
+}
+.svg-navigation{
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url(../../../public/assets/images/home-icon-silhouette-svgrepo-com.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+}
+.svg-search{
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url(../../../public/assets/images/search-svgrepo-com.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+}
+.svg-message{
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url(../../../public/assets/images/message-square-lines-alt-svgrepo-com.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+}
+.svg-profile{
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url(../../../public/assets/images/profile-svgrepo-com.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
 }

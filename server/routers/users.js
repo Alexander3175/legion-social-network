@@ -22,6 +22,8 @@ router.get("/refresh", UserController.refresh);
 router.get("/users", authMiddleware, UserController.getUsers);
 router.get("/posts", authMiddleware, PostController.getPosts);
 router.get("/users/:id", authMiddleware, PostController.getUserId);
+router.post("/posts/search", authMiddleware, PostController.search);
+
 router.post("/post/:id/like", authMiddleware, PostController.like);
 router.put("/user/profile", authMiddleware, UserController.updateUserProfile);
 

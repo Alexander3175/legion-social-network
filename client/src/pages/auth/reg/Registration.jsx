@@ -66,7 +66,7 @@ function RegistrationUser() {
             id="userGmail"
             required
             placeholder="Email"
-            maxLength="20"
+            maxLength="30"
             value={userGmail}
             onChange={(e) => setUsergmail(e.target.value)}
           />

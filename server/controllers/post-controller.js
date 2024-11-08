@@ -13,31 +13,29 @@ class PostController {
 
   async createPost(req, res, next) {
     try {
-        const { title, content } = req.body;
-        const userId = req.user.id;
+      const { title, content } = req.body;
+      const userId = req.user.id;
 
-        console.log("Received data:", { title, content, userId, file: req.file });
+      console.log("Received data:", { title, content, userId, file: req.file });
 
-        let filePath = null;
-        if (req.file) {
-            filePath = req.file.path;
-            console.log("Received file path:", filePath);
-        }
+      let filePath = null;
+      if (req.file) {
+        filePath = req.file.path;
+        console.log("Received file path:", filePath);
+      }
 
-        const post = await postService.createPost({
-            user_id: userId,
-            title,
-            content,
-           file: filePath.replace(/\\/g, '/'),
-        });
+      const post = await postService.createPost({
+        user_id: userId,
+        title,
+        content,
+        file: filePath.replace(/\\/g, "/"),
+      });
 
-        return res.json(post);
+      return res.json(post);
     } catch (e) {
-        next(e);
+      next(e);
     }
-}
-
-  
+  }
 
   async getUserId(req, res, next) {
     const userId = req.params.id;
@@ -60,23 +58,38 @@ class PostController {
   async like(req, res, next) {
     const postId = req.params.id;
     const userId = req.user.id;
-  
+
     try {
-        const post = await postModel.findById(postId);
-        if (!post) {
-            return res.status(404).send('Пост не знайдено');
-        }
-        
-        await postService.like(post, userId);
-        await post.save();
-        
-        return res.status(200).send(post);
+      const post = await postModel.findById(postId);
+      if (!post) {
+        return res.status(404).send("Пост не знайдено");
+      }
+
+      await postService.like(post, userId);
+      await post.save();
+
+      return res.status(200).send(post);
     } catch (e) {
-        console.error(e);
-        return res.status(500).send('Помилка сервера');
+      console.error(e);
+      return res.status(500).send("Помилка сервера");
     }
   }
-  
+
+  async search(req, res, next) {
+    const { userName, keyword } = req.body;
+    try {
+      if (!userName && !keyword) {
+        return res
+          .status(400)
+          .json({ error: "Потрібно вказати хоча б один параметр." });
+      }
+      const response = await postService.search({ userName, keyword });
+      return res.status(200).json(response);
+    } catch (e) {
+      console.error(e);
+      return res.status(500).send("Помилка сервера");
+    }
+  }
 }
 
 export default new PostController();

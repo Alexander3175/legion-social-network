@@ -33,14 +33,21 @@ const Posts = observer(() => {
   const handleLike = async (postId) => {
     try {
       const updatedPost = await postService.like(postId);
-
-      postStore.updatePosts(updatedPost);
-      alert("Лайк успішно додано!");
+  
+      const user = await userService.fetchUserById(updatedPost.user);
+      
+      const updatedPostWithUser = { ...updatedPost, user };
+  
+      const updatedPosts = postStore.posts.map((post) =>
+        post._id === updatedPostWithUser._id ? updatedPostWithUser : post
+      );
+      postStore.setPosts(updatedPosts);
+  
     } catch (error) {
       console.error("Помилка під час лайку поста:", error);
-      alert("Не вдалося лайкнути пост. Спробуйте ще раз.");
     }
   };
+  
 
   return (
     <div className="post-wrapper">

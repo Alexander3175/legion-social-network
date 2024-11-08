@@ -42,7 +42,6 @@ import { observer } from "mobx-react-lite";
         <div className="profile-container">
           <div className="profile-header">
             <div className="profile-image">
-              <img src="/path/to/profile-pic.jpg" alt="User Profile" />
             </div>
             <div className="profile-info">
               <h2 className="username">{store.user.name}</h2>

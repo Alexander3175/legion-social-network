@@ -7,48 +7,77 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
+  background-color: #f4f6f9;
 }
+
 .post-item {
   margin-block: 20px;
-  background-color: white;
-  border: 1px solid rgba(7, 7, 7, 0.7);
-  border-radius: 10px;
+  background-color: #ffffff;
+  border: 1px solid rgba(7, 7, 7, 0.1); 
+  border-radius: 12px;
   padding: 25px;
   width: 702px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  
+  justify-content: flex-start;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+
+  &:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
   @media (max-width: 768px) {
     padding: 20px;
     width: 95%;
   }
 
   .post-item__photo {
-    width: 100%; /* Ширина контейнера для фото */
-    display: flex; /* Дозволяє центрований контент */
-    justify-content: center; /* Центрує вміст */
-    align-items: center; /* Вертикальне центровання */
-    margin-block: 30px; /* Відступ знизу */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-block: 30px;
     
     img,
     video {
-      width: 100%; /* Ширина зображення/відео заповнює батьківський контейнер */
-      max-height: 400px; /* Максимальна висота для зображення/відео */
-      object-fit: cover; /* Зберігає пропорції */
-      border-radius: 8px; /* Закруглені кути */
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s ease; 
+      &:hover {
+        transform: scale(1.05); 
+      }
     }
   }
 
   .post-item__content {
     margin-top: 25px;
+    
+    h3 {
+      font-size: 22px;
+      font-weight: bold;
+      color: #333; 
+      margin-bottom: 15px;
+    }
+    
+    p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #666; 
+    }
   }
 
   .image-test {
     width: 100%;
     height: 400px;
-    background-color: black;
-
+    background-color: #ccc;
+    border-radius: 8px;
+    
     @media (max-width: 768px) {
       height: 300px;
     }
@@ -58,6 +87,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    margin-bottom: 15px;
 
     @media (max-width: 768px) {
       flex-direction: column;
@@ -69,7 +99,9 @@
     width: 55px;
     height: 55px;
     border-radius: 50%;
-    background-color: black;
+    background-color: #e74c3c;
+    background-image: url('../../../public/assets/images/user-avatar-placeholder.png'); 
+    background-size: cover;
 
     @media (max-width: 768px) {
       width: 45px;
@@ -80,11 +112,12 @@
   .test-imageLikes {
     width: 50px;
     height: 50px;
-    border-radius: 20%;
     background-image: url(../../../public/assets/images/iconmonstr-heart-thin.svg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 
     @media (max-width: 768px) {
       width: 40px;

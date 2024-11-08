@@ -1,6 +1,17 @@
 import { Link } from "react-router-dom";
+import Search from "../search/Search";
 import "./AsideStyle.scss";
+import { useState } from "react";
 export default function Aside() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   return (
     <aside className="wrapperAside">
       <div className="asideConteiner">
@@ -11,21 +22,24 @@ export default function Aside() {
           <div className="navigation">
             <ul className="navigationList">
               <li>
-                <div className="svg-navigation">d1</div>
+                <div className="svg-navigation"></div>
                 <Link to="/">Головна</Link>
               </li>
               <li>
-                <div className="svg-navigation">d2</div>
-                <a href="#">Пошук</a>
+                <div className="svg-search"></div>
+                <a href="#" onClick={openModal}>
+                  Пошук
+                </a>
               </li>
               <li>
-                <div className="svg-navigation">d3</div>
+                <div className="svg-message"></div>
                 <a href="#">Повідомлення</a>
               </li>
             </ul>
           </div>
           <div className="personal">
             <div className="profile">
+            <div className="svg-profile"></div>
               <Link to="/profile">Профіль</Link>
             </div>
             <div className="more">
@@ -34,6 +48,8 @@ export default function Aside() {
           </div>
         </div>
       </div>
+      
+      <Search isOpen={isOpen} closeModal={closeModal} />
     </aside>
   );
 }

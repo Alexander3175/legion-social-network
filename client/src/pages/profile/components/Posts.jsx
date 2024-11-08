@@ -31,10 +31,10 @@ export default function Posts() {
     if (store.user && store.user.id) {
       fetchData();
     }
-  }, [store.user]);
+  }, [postStore, store.user]);
 
   return (
-    <>
+    <div className="profile-posts-conteiner">
         {loading ? (
           <p>Завантаження постів...</p>
         ) : postStore.posts?.length > 0 ? (
@@ -72,6 +72,6 @@ export default function Posts() {
         ) : (
           <p>У вас нема постів</p>
         )}
-    </>
+    </div>
   );
 }
